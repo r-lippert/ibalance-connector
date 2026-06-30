@@ -15,4 +15,5 @@ I use PlatformIO and Visual Studio Code to build this firmware. The main program
 
 ## Hardware setup
 Use an ESP8266 board and connect the GND pin to the brown wire of the _i-balance_ display, the software serial RX pin to the green wire.
-Do NOT attempt to steal the 5V for the ESP8266 power supply from the display. It won't sustain the microcontroller. The easiest way to power the ESP8266 is an external USB power supply. You may also use a DC-DC buck converter to change the 24V supply of the _i-balance_ to 5V for the ESP8266. If you do it wrong, be prepared for blue smoke damage!
+
+Do NOT attempt to steal the 5V for the ESP8266 power supply from the display. It won't sustain the microcontroller. The easiest way to power the ESP8266 is an external USB power supply. You may also use a DC-DC buck converter to change the 24V supply of the _i-balance_ to 5V for the ESP8266. Make sure you get the voltage and polarity right or be prepared for blue smoke damage!
