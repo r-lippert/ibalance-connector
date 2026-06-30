@@ -1,19 +1,52 @@
 # ibalance-connector
-Connect the _JUDO i-balance_ limescale protection system to home automation systems via MQTT
 
-This firmware allows an ESP8266 microcontroller to listen to the serial communication from the main controller board to the display inside the _i-balance_ device. The displayed strings are forwarded to an MQTT broker for use in a home automation system such as Home Assistant.
+Connect a JUDO i-balance limescale protection system to a home automation system via MQTT.
 
-## Please note
-_This is an independent, unofficial open-source project and is not affiliated with, endorsed by, or supported by JUDO._
+This firmware allows an ESP8266 microcontroller to passively monitor the serial communication between the main controller board and the display of an i-balance device. Text shown on the display is forwarded to an MQTT broker for use with a home automation system such as Home Assistant.
 
-_i-balance and JUDO are trademarks of their respective owners. The names are used solely to describe compatibility with the corresponding device._
+## Project status and trademarks
 
-_**Warning:** Manipulating electric connections inside the device may void your warranty, damage or destroy the device, or cause serious injury or death._
+This is an independent, unofficial open-source project. It is not affiliated with, endorsed by, authorized by, or supported by JUDO.
+
+The names JUDO and i-balance are used solely to identify the product with which this project is intended to interoperate. All trademarks and trade names remain the property of their respective owners.
+
+Use of this project does not imply that the connected device, firmware version, or hardware revision is supported or approved by its manufacturer.
+
+## Safety warning
+
+**Working inside an electrical appliance can cause electric shock, fire, damage to property, serious injury, or death. It may also void the manufacturer's warranty.**
+
+Disconnect the device completely from the mains supply before opening it or making any electrical connection. Do not work on the device while it is powered or connected to the mains.
+
+Only carry out this modification if you have the necessary knowledge and qualifications to work safely on electrical and electronic equipment. Otherwise, consult a qualified professional.
+
+Do not assume that wire colours, connector pinouts, signal levels, or supply voltages are identical across all models and hardware revisions. Verify all connections and voltages before connecting the ESP8266.
+
+This project is intended only for passive monitoring. Do not use it for safety-related functions or as a replacement for any original protection, warning, control, or maintenance function of the device.
+
+The project is provided without any warranty. You are responsible for assessing the suitability and safety of the hardware setup and for any modifications made to your device.
 
 ## How to build
-I use PlatformIO and Visual Studio Code to build this firmware. The main program uses a `config.h` for configuration values. Copy the existing `config_example.h` and enter your Wifi and MQTT connection data.
+
+This firmware can be built using PlatformIO, for example with Visual Studio Code.
+
+The main program reads configuration values from `config.h`. Copy `config_example.h` to `config.h` and enter your Wi-Fi and MQTT connection details.
+
+Do not commit `config.h` if it contains passwords or other credentials.
 
 ## Hardware setup
-Use an ESP8266 board and connect the GND pin to the brown wire of the _i-balance_ display, the software serial RX pin to the green wire.
 
-Do NOT attempt to steal the 5V for the ESP8266 power supply from the display. It won't sustain the microcontroller. The easiest way to power the ESP8266 is an external USB power supply. You may also use a DC-DC buck converter to change the 24V supply of the _i-balance_ to 5V for the ESP8266. Make sure you get the voltage and polarity right or be prepared for blue smoke damage!
+The current prototype uses an ESP8266 board.
+
+For the tested hardware revision:
+
+* Connect the ESP8266 ground to the brown display wire.
+* Connect the configured software-serial RX input to the green display wire.
+
+**Verify these connections on your own device before proceeding. Wire colours and pin assignments may differ between models or hardware revisions.**
+
+Do not power the ESP8266 from the display's 5 V connection. In the tested device, this supply was not able to provide the current required by the microcontroller.
+
+The safest option is to use a separate, suitable USB power supply. A properly rated and installed DC-DC converter may alternatively be used to convert the device's 24 V supply to 5 V. Verify the input voltage, output voltage, polarity, current rating, insulation requirements, and common-ground arrangement before connecting it.
+
+Incorrect wiring or an unsuitable power supply may damage the ESP8266, the display, or the main controller board.
